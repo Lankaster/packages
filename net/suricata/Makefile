@@ -33,12 +33,29 @@ define Package/suricata
     URL:=https://suricata-ids.org/
 endef
 
+define Package/suricata/description
+  Suricata is a free and open source, mature, fast and robust network
+  threat detection engine.
+  The Suricata engine is capable of real time intrusion detection (IDS),
+  inline intrusion prevention (IPS), network security monitoring
+  (NSM) and offline pcap processing.
+  Suricata inspects the network traffic using a powerful and extensive
+  rules and signature language, and has powerful Lua scripting support
+  for detection of complex threats.
+
+  Snort is an open source network intrusion detection and prevention system.
+  It is capable of performing real-time traffic analysis, alerting, blocking
+  and packet logging on IP networks.  It utilizes a combination of protocol
+  analysis and pattern matching in order to detect anomalies, misuse and
+  attacks.
+endef
+
+
 CONFIGURE_ARGS = \
 	--prefix="/usr" \
     --sysconfdir="/etc" \
 	--enable-nfqueue \
 	--enable-gccprotect \
-	--enable-debug \
 	--enable-pie \
 	--host=$(ARCH)
 
