@@ -10,31 +10,29 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libdmapsharing
-PKG_VERSION:=3.9.3
+PKG_VERSION:=3.9.10
 PKG_RELEASE:=1
-
-PKG_MAINTAINER:=W. Michael Petullo <mike@flyn.org>
-
-PKG_LICENSE:=LGPLv2.1
-PKG_LICENSE_FILES:=COPYING
 
 PKG_SOURCE:=libdmapsharing-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://www.flyn.org/projects/libdmapsharing/
-PKG_HASH:=a19df4b6fbd669fc95824860c235aa4aed33b69ecc25eb9d9d6dccb4e98c3f18
+PKG_HASH:=e216425d61a109f08f0ac93065f4603d1e61ebd85c09802c03a9ecce5bb35094
+
+PKG_MAINTAINER:=W. Michael Petullo <mike@flyn.org>
+PKG_LICENSE:=LGPL-2.1-or-later
+PKG_LICENSE_FILES:=COPYING
 
 PKG_FIXUP:=autoreconf
 PKG_INSTALL:=1
+PKG_BUILD_PARALLEL:=1
+PKG_BUILD_DEPENDS:=glib2/host
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/nls.mk
 
-TARGET_LDFLAGS+= \
-	-Wl,-rpath-link=$(STAGING_DIR)/usr/lib
-
 define Package/libdmapsharing
   SECTION:=libs
   CATEGORY:=Libraries
-  DEPENDS:=+libsoup +mdnsresponder +gstreamer1-libs +gstreamer1-plugins-base +gst1-mod-app
+  DEPENDS:=+libsoup +mdnsresponder +gstreamer1-plugins-base +gst1-mod-app
   TITLE:=libdmapsharing
   URL:=https://www.flyn.org/projects/libdmapsharing/
 endef
@@ -44,7 +42,7 @@ define Package/libdmapsharing/decription
 endef
 
 CONFIGURE_ARGS += \
-	--disable-check \
+	--disable-tests \
 	--disable-gtk-doc \
 	--disable-introspection
 

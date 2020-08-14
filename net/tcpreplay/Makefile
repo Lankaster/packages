@@ -8,15 +8,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=tcpreplay
-PKG_VERSION:=4.3.0
+PKG_VERSION:=4.3.3
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/appneta/tcpreplay/releases/download/v$(PKG_VERSION)
-PKG_HASH:=935c9f5483a9f0ffd5a5ad055b6c7be5c14a3bc9023d4e45ec80dd94857ac79f
+PKG_HASH:=5e960e2a4432f583adbd11fa0855d17b73d9e0f2d6453b749f27aacaee53bab5
 
 PKG_LICENSE:=GPL-3.0
 PKG_LICENSE_FILES:=docs/LICENSE
+PKG_CPE_ID:=cpe:/a:appneta:tcpreplay
 
 PKG_FIXUP:=libtool
 PKG_INSTALL:=1
@@ -28,7 +29,7 @@ TCPREPLAY_MODULES:= \
 	tcpreplay tcpreplay-edit tcprewrite
 
 define Package/tcpreplay/default
-  SUBMENU:=tcprelay
+  SUBMENU:=Tcpreplay
   SECTION:=net
   CATEGORY:=Network
   URL:=http://tcpreplay.appneta.com/

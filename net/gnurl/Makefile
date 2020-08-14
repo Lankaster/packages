@@ -8,16 +8,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gnurl
-PKG_VERSION:=7.61.1
-PKG_RELEASE:=2
+PKG_VERSION:=7.70.0
+PKG_RELEASE:=1
 
-PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=git://git.taler.net/gnurl
-PKG_SOURCE_VERSION:=64adbb00957f178bb7b9b1dbf0d0de1f5c45949d
+PKG_SOURCE_URL:=@GNU/gnunet
 
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
-PKG_MIRROR_HASH:=6f6c993a13fe30989cb918c987604ca96c178f4bb682c298ab345257e4aab284
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_HASH:=0acfcf7921eab323d41be3c8dbb3c4926530bb1fdd95b4fa6f412eb291a2a95f
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYING
@@ -30,7 +28,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/gnurl/Default
   SECTION:=net
   CATEGORY:=Network
-  URL:=https://gnunet.org/gnurl
+  URL:=https://gnunet.org/en/gnurl.html
   MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 endef
 

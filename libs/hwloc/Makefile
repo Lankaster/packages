@@ -6,18 +6,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=hwloc
-PKG_VERSION:=2.0.2
-PKG_RELEASE:=2
+PKG_VERSION:=2.1.0
+PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
-PKG_SOURCE_URL:=https://download.open-mpi.org/release/$(PKG_NAME)/v2.0
-PKG_HASH:=14457d70e6f98ee9eb3f2940000da4bac99909a49560ef2fdf4eacd286410cde
+PKG_SOURCE_URL:=https://download.open-mpi.org/release/$(PKG_NAME)/v2.1
+PKG_HASH:=19429752f772cf68321196970ffb10dafd7e02ab38d2b3382b157c78efd10862
 
-PKG_LICENSE:=BSD-3-Clause
 PKG_MAINTAINER:=W. Michael Petullo <mike@flyn.org>
+PKG_LICENSE:=BSD-3-Clause
+PKG_LICENSE_FILES:=COPYING
 PKG_INSTALL:=1
-
-PKG_FIXUP:=autoreconf
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -56,6 +55,7 @@ $(call Package/hwloc/Default)
   SECTION:=libs
   CATEGORY:=Libraries
   TITLE+= libraries
+  DEPENDS+=+libpciaccess
 endef
 
 define Package/libhwloc/description

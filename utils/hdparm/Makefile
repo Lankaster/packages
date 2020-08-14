@@ -9,19 +9,17 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=hdparm
 PKG_VERSION:=9.58
-PKG_RELEASE:=1
-PKG_USE_MIPS16:=0
+PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@SF/$(PKG_NAME)
 PKG_HASH:=9ae78e883f3ce071d32ee0f1b9a2845a634fc4dd94a434e653fdbef551c5e10f
 
-PKG_MAINTAINER:=Rosen Penev <rosenp@gmail.com>
+PKG_MAINTAINER:=
 PKG_LICENSE:=BSD-Style Open Source License
+PKG_LICENSE_FILES:=LICENSE.TXT
 
 include $(INCLUDE_DIR)/package.mk
-
-TARGET_CFLAGS+=-D_GNU_SOURCE
 
 define Package/hdparm
   SECTION:=utils

@@ -6,23 +6,21 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=v4l-utils
-PKG_VERSION:=1.14.2
-PKG_RELEASE:=1
+PKG_VERSION:=1.20.0
+PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://www.linuxtv.org/downloads/v4l-utils
-PKG_HASH:=e6b962c4b1253cf852c31da13fd6b5bb7cbe5aa9e182881aec55123bae680692
+PKG_HASH:=956118713f7ccb405c55c7088a6a2490c32d54300dd9a30d8d5008c28d3726f7
 
 PKG_MAINTAINER:=Ted Hess <thess@kitschensync.net>
-
-PKG_LICENSE:=GPL-2.0 LGPL-2.1
-PKG_LICENSE_FILES:=COPYING COPYING.libv4l
 
 PKG_USE_MIPS16:=0
 PKG_FIXUP:=autoreconf
 PKG_INSTALL:=1
+PKG_BUILD_PARALLEL:=1
 
-PKG_BUILD_DEPENDS:=argp-standalone
+PKG_BUILD_DEPENDS:=!USE_GLIBC:argp-standalone
 
 include $(INCLUDE_DIR)/uclibc++.mk
 include $(INCLUDE_DIR)/package.mk
@@ -30,7 +28,7 @@ include $(INCLUDE_DIR)/nls.mk
 
 define Package/libv4l/Default
   TITLE:=Video 4 Linux
-  URL:=http://www.linuxtv.org/
+  URL:=https://www.linuxtv.org/
 endef
 
 define Package/libv4l/Default/description
@@ -54,6 +52,8 @@ define Package/libv4l
   CATEGORY:=Libraries
   TITLE+= wrapper libraries
   DEPENDS := +libpthread +librt $(ICONV_DEPENDS)
+  LICENSE:=LGPL-2.1-or-later
+  LICENSE_FILES:=COPYING.libv4l
 endef
 
 define Package/libv4l/description
@@ -65,7 +65,9 @@ define Package/v4l-utils
   SECTION:=utils
   CATEGORY:=Utilities
   TITLE+= utilities
-  DEPENDS := +libv4l $(CXX_DEPENDS) $(ICONV_DEPENDS)
+  DEPENDS:= +libv4l $(CXX_DEPENDS) $(ICONV_DEPENDS) $(INTL_DEPENDS)
+  LICENSE:=GPL-2.0-or-later
+  LICENSE_FILES:=COPYING
 endef
 
 define Package/v4l-utils/description
@@ -73,14 +75,19 @@ define Package/v4l-utils/description
   This package contains the video4linux utilities.
 endef
 
-TARGET_CFLAGS += $(FPIC)
-TARGET_LDFLAGS += -largp
+TARGET_CFLAGS += -flto
+TARGET_CXXFLAGS += -std=c++11
+TARGET_LDFLAGS += \
+	$(if $(CONFIG_LIBC_USE_GLIBC),,-largp) \
+	-Wl,--gc-sections,--as-needed
 
 CONFIGURE_ARGS+= \
+	--disable-bpf \
 	--disable-doxygen-doc \
 	--disable-libdvbv5 \
 	--disable-qv4l2 \
-	--without-jpeg \
+	--disable-qvidcap \
+	--without-jpeg
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
