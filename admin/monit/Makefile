@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=monit
-PKG_VERSION:=5.34.0
+PKG_VERSION:=5.34.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://bitbucket.org/tildeslash/monit/downloads/
-PKG_HASH:=37f514cd8973bbce104cb8517ff3fc504052a083703eee0d0e873db26b919820
+PKG_HASH:=ef1a05d8140bc0165ee6653b942b6ff5fa73f9aec11b02fc47c9c1cab9174152
 
 PKG_MAINTAINER:=Yaroslav Petrov <info@lank.me>
 PKG_LICENSE:=AGPL-3.0
